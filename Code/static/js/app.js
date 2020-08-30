@@ -7,7 +7,8 @@ function unique(arr){
     })
 }
 
-d3.json(url).then(function(data) {
+var file_content = d3.json(url)
+file_content.then(function(data) {
     /* Bar plot */
     //Most browsers are not compatible with json in object format;
     //Hence, converted the json to array of objects format
@@ -27,8 +28,15 @@ d3.json(url).then(function(data) {
     //Fill the test subject IDs in the dropdown
 
 }
-)
+);
 
 function optionChanged(value){
-    console.log(value);
+    //console.log(value);
+    file_content.then(function(data){
+        var demographics = data[0]['metadata'].filter(item=>item.id==value)[0];
+        //d3.select("#sample-metadata").html(`<ul style="list-style-type:none;"><li>id: ${demographics_initial.id}</li><li>ethnicity: ${demographics_initial.ethnicity}</li><li>gender: ${demographics_initial.gender}</li><li>age: ${demographics_initial.age}</li><li>location: ${demographics_initial.location}</li><li>bbtype: ${demographics_initial.bbtype}</li><li>wfreq: ${demographics_initial.wfreq}</li></ul>`);
+        d3.select('#sample-metadata').html(`<p>id: ${demographics.id}</p><p>ethnicity: ${demographics.ethnicity}</p><p>gender: ${demographics.gender}</p><p>age: ${demographics.age}</p><p>location: ${demographics.location}</p><p>bbtype: ${demographics.bbtype}</p><p>wfreq: ${demographics.wfreq}</p>`);
+
+    });
+    
 }

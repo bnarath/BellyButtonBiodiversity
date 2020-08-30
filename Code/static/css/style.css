@@ -41,9 +41,8 @@
 #selDataset {
     font-size: 80%;
     height: 30px;
-    max-height: 50vh;
-    overflow: scroll;
-    overflow-x: hidden;
+    overflow: auto;
+    max-height: 500px;
     margin-top: 0px;
     border-radius: 5px;
 }
