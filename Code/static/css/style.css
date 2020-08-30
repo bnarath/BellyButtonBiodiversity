@@ -37,6 +37,29 @@
     height: 100vh;
 }
 
+/* Dropdown subject ID styling*/
 #selDataset {
     font-size: 80%;
+    height: 30px;
+    max-height: 50vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    margin-top: 0px;
+    border-radius: 5px;
+}
+
+/*Style ID selector*/
+.well {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px blue solid;
+    background-color: grey;
+    padding: 0px;
+}
+
+.header {
+    margin: 0;
+    padding: 4px;
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
 }

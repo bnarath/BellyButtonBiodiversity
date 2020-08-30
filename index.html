@@ -64,16 +64,18 @@
   <div class="container-fluid main-body pt-5">
     <div class="row">
       <div class="col-md-4">
-        <div class="well mb-3">
-          <h5>Test Subject ID</h5>
-          <small>Pick test subject ID</small>
+        <div class="well mb-3 panel panel-primary">
+          <div class="panel-heading bg-primary text-white header">
+            Test Subject ID
+          </div>
+          <small class="px-1 py-5">Pick test subject ID</small>
           <select id="selDataset" onchange="optionChanged(this.value)"></select>
         </div>
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Demographic Info</h3>
+        <div class="panel panel-primary well">
+          <div class="panel-heading  bg-primary text-white header">
+            <h3 class="panel-title" style="font-size: 110%;">Demographic Info</h3>
           </div>
-          <div id="sample-metadata" class="panel-body"></div>
+          <div id="sample-metadata" class="panel-body  px-1 py-2" style="font-size: 80%;"></div>
         </div>
       </div>
       <div class="col-md-5">
