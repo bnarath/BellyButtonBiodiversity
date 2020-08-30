@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Bellybutton Biodiversity</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+
+<body>
+
+  
+  <div id="carousel_frame" class="carousel slide" data-ride="carousel">
+
+    <!-- Indicators -->
+    <ul class="carousel-indicators">
+      <li data-target="#carousel_frame" data-slide-to="0" class="active"></li>
+      <li data-target="#carousel_frame" data-slide-to="1"></li>
+      <li data-target="#carousel_frame" data-slide-to="2"></li>
+    </ul>
+    
+    <!-- The slideshow -->
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="../Images/bacteria1.jpg" alt="bacteria_front">
+        <div class="carousel-caption text-center mb-5">
+          <h1>Belly Button Biodiversity Dashboard</h1>
+          <p>Use the interactive charts below to explore the dataset</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="../Images/bacteria2.jpg" alt="belly-button-biodiversity">
+        <div class="carousel-caption text-center mb-5">
+          <h1>Belly Button Biodiversity</h1>
+          <p>The coolest study of biodiversity on the human body on the planet!</p>
+          <button id="button1"><a target="_blank" href="http://robdunnlab.com/projects/belly-button-biodiversity/">Check it out!!</a></button>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="../Images/bacteria3.jpg" alt="bacteria3">
+        <div class="carousel-caption text-center mb-5">
+          <h1>Belly Button Portraits</h1>
+          <p>An Opportunity to Create Art through Science!</p>
+          <button id="button2"><a target="_blank" href="http://yourwildlife.org/2014/10/belly-button-portraits-an-opportunity-to-create-art-through-science/">Check it out!!</a></button>
+        </div>
+      </div>
+    </div>
+    <!-- Left and right controls -->
+      <a class="carousel-control-prev" href="#carousel_frame" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" href="#carousel_frame" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+  </div> 
+
+
+  <div class="container-fluid main-body">
+    <div class="row">
+      <div class="col-md-2">
+        <div class="well">
+          <h5>Test Subject ID No.:</h5>
+          <select id="selDataset" onchange="optionChanged(this.value)"></select>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Demographic Info</h3>
+          </div>
+          <div id="sample-metadata" class="panel-body"></div>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div id="bar"></div>
+      </div>
+      <div class="col-md-5">
+        <div id="gauge"></div>
+      </div>
+    </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div id="bubble"></div>
+        </div>
+      </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="./static/js/app.js"></script>
+  <script src="./static/js/bonus.js"></script>
+  <script src="samples.json"></script>
+  
+</body>
+
+</html>
