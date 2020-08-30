@@ -32,7 +32,11 @@
 
 /* backround dark color light text style */
 .main-body {
-    background-color: #131C2D;
-    color: white;
+    /*background-color: #131C2D;
+    color: white;*/
     height: 100vh;
+}
+
+#selDataset {
+    font-size: 80%;
 }
