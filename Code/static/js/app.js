@@ -126,11 +126,67 @@ file_content.then(function(data) {
     // The dataset reveals that a small handful of microbial species 
     // (also called operational taxonomic units, or OTUs, in the study) were present in more than 70% of people, while the rest were relatively rare.
     var individual = data[0]['samples'].filter(item=>item.id==names[0])[0];
-    //console.log(individual);
     top10BarhPlot(individual, `Top 10 OTUs in Subject ID ${names[0]}`, "bar");
     bubbleChart(individual, `Sample values for each OTUs in Subject ID ${names[0]}`, "bubble");
     
+    //wfreq
+    var wfreq = data[0]["metadata"].map(item=>item.wfreq);
+    //Replace null with zeros
+    wfreq = Array.from(wfreq, item => item || 0);
+    //Find max and min
+    var max_wfreq = wfreq.reduce((a, b) => {
+        return (a>b ? a:b);
+    })
+    var min_wfreq = wfreq.reduce((a, b) => {
+        return (a<b ? a:b);
+    })
 
+    // The basic structure of a gauge chart is similar to a donut chart. This means that we can use some cleverly selected values and create simple gauge charts by still keeping the type attribute set to pie. Basically, we will be hiding some sections of the full pie to make it look like a gauge chart.
+    // The trick they did is to put a hole into the pie with an radius of 0.5, 
+    // now they have a donut chart. What they did in addition is kind of tricky, they put N + 1 values to the pie/donut Chart. 
+    // N is the number of gauge chart elements you want to have. You also have to define N + 1 colors and N + 1 labels for the chart.
+    // This divides the whole pie equally between the hidden and visible part (Last value corresponds to invisible)
+
+    //console.log(max_wfreq, min_wfreq, Math.min(...wfreq), Math.max(...wfreq));
+    var labels = Array.from(Array(max_wfreq).keys()).slice(min_wfreq).map(item=>`${item}-${item+1}`);
+    console.log(labels);
+    //create values - We need to build an array of all ones for all the labels , no of labels
+    var values = new Array(max_wfreq-min_wfreq).fill(1);
+    values.push(max_wfreq-min_wfreq);
+    labels.push("");
+    
+    function greenShades(N){
+        var arr = [];
+        var start = 10, end = 255, opacity=0.1;
+        for(let i=0; i<N; i++){
+            opacity += (0.9/N);
+            arr.push(`rgba(0,${Math.floor(start+(i+1)*(end-start)/N)},0,${opacity.toFixed(1)})`)
+        }
+        return arr;
+    }
+    gauge_colors = greenShades(max_wfreq-min_wfreq);
+    gauge_colors.push("rgba(255,255,255,1)");
+
+    var gauge = {
+        type: "pie",
+        values: values,
+        rotation: 90,
+        text: labels,
+        textinfo: "text",
+        textposition: "inside",
+        "marker": {
+            colors: gauge_colors,
+        },
+        labels: labels,
+        hoverinfo: "label",
+        hole: .4,
+        type: "pie",
+        showlegend: false,
+        direction: "clockwise"
+      }
+
+    //  The next part of the code deals with the needle of the gauge chart. The value that you set for the degrees variable will determine the angle at which the needle is drawn. The radius variable determines the length of the needle. The attributes x0 and y0 are used to set the starting point of our line. Similarly, the attributes x1 and y1 are used to set the ending point of our line. 
+    Plotly.plot("gauge", [gauge]);
 }
 );
 
