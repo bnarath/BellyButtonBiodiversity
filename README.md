@@ -8,7 +8,7 @@ This project is to build an interactive dashboard to explore the [Belly Button B
 
 **Javascript libraries [d3](https://d3js.org/) and [Plotly](https://plotly.com/javascript/) are used in this project.**
 
-## Website is deployed [here!]()
+## Website is deployed [here!](https://bnarath.github.io/BellyButtonBiodiversity/)
 
 ![Webpage](Images/webpage.png)
 
