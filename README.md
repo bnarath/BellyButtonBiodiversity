@@ -51,6 +51,10 @@ This project is to build an interactive dashboard to explore the [Belly Button B
 
 7. Update all of the plots any time that a new sample is selected.
 
+## CodeBase
+* [app.js](static/js/app.js)
+* [style.css](statics/css/style.css)
+* [index.html](index.html)
 
 ## References
 
