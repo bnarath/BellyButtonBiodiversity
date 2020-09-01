@@ -14,7 +14,7 @@ The dataset reveals that a small handful of microbial species (also called opera
 
 <p>
 <img align="right" src="Images/webpage.png" 
-       style={{ width: "500", float: 'right' }}/>
+       style={{ width: "500px", float: 'right' }}/>
 
 
 1. D3 library is used to read [data.](data/samples.json)
