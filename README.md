@@ -6,7 +6,7 @@ The belly button is one of the habitats closest to us, and yet it remains relati
 
 This project is to build an interactive dashboard to explore the [Belly Button Biodiversity dataset](http://robdunnlab.com/projects/belly-button-biodiversity/), which catalogs the microbes that colonize human navels. The dataset reveals that a small handful of microbial species (also called operational taxonomic units, or OTUs, in the study) were present in more than 70% of people, while the rest were relatively rare.
 
-**`Javascript libraries [d3](https://d3js.org/) and [Plotly](https://plotly.com/javascript/) are used in this project.`**
+**Javascript libraries [d3](https://d3js.org/) and [Plotly](https://plotly.com/javascript/) are used in this project.**
 
 ## Website is deployed [here!]()
 
