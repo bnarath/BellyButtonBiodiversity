@@ -1,6 +1,6 @@
 # Belly Button Biodiversity
 
-![Bacteria by filterforge.com](Images/bacteria1.jpg)
+![Bacteria by filterforge.com](Images/bacteria2.jpg)
 
 The belly button is one of the habitats closest to us, and yet it remains relatively unexplored. In January 2011, researchers Huclr, J., Latimer, et al launched Belly Button Biodiversity to investigate the microbes inhabiting our navels and the factors that might influence the microscopic life calling this protected, moist patch of skin home. In addition to inspiring scientific curiosity, Belly Button Biodiversity inspired conversations about the beneficial roles microbes play in our daily lives.
 
@@ -10,12 +10,11 @@ The dataset reveals that a small handful of microbial species (also called opera
 
 `**Javascript libraries [d3](https://d3js.org/) and [Plotly](https://plotly.com/javascript/) are used in this project.**`
 
+## Website is deployed [here!]()
+
+![Webpage](Images/webpage.png)
+
 ## Steps
-
-<p>
-<img align="right" src="Images/webpage.png" 
-       style={{ width: "500px", float: 'right' }}/>
-
 
 1. D3 library is used to read [data.](data/samples.json)
 
@@ -53,11 +52,7 @@ The dataset reveals that a small handful of microbial species (also called opera
 * Update the chart whenever a new sample is selected.
 
 7. Update all of the plots any time that a new sample is selected.
-</p>
 
-## Deployment
-
-App is deployed in GitHub Pages at 
 
 ## References
 
