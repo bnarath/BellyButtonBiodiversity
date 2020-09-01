@@ -12,6 +12,11 @@ The dataset reveals that a small handful of microbial species (also called opera
 
 ## Steps
 
+<p>
+<img align="right" src="Images/webpage.png" 
+       style={{ width: 100, float: 'right' }}/>
+
+
 1. D3 library is used to read [data.](data/samples.json)
 
 2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual.
@@ -48,7 +53,7 @@ The dataset reveals that a small handful of microbial species (also called opera
 * Update the chart whenever a new sample is selected.
 
 7. Update all of the plots any time that a new sample is selected.
-
+</p>
 
 ## Deployment
 
