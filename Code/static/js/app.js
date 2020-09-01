@@ -1,5 +1,5 @@
 /* Global variables */
-var url = "../../data/samples.json";
+var url = "data/samples.json";
 var file_content = d3.json(url)
 var radius = 0.3;
 
