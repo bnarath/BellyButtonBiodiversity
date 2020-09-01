@@ -6,7 +6,7 @@ var radius = 0.3;
 
 
 //Barplot
-function top10BarhPlot(individual, title, id, restyle=false){
+function top10BarhPlot(individual, name, id, restyle=false){
     //Sort individual OTU ids based on sample values in descending order
     var otu = individual["otu_ids"].sort((a,b)=> individual.sample_values[individual["otu_ids"].indexOf(b)] - individual.sample_values[individual["otu_ids"].indexOf(a)] ).map(item => "OTU "+item);
     var otu_labels = individual["otu_labels"].sort((a,b)=> individual.sample_values[individual["otu_labels"].indexOf(b)] - individual.sample_values[individual["otu_labels"].indexOf(a)]);
@@ -23,20 +23,23 @@ function top10BarhPlot(individual, title, id, restyle=false){
         sample_values = sample_values.sort((a,b)=> -1);
         
         //Title styling
-        var title = {'text':title, 'font':{'family':'Arial Black', 'color':'black', 'size':16}, 'x':0.5, 'xanchor':'center', 'y':0.85, 'yanchor':'top'};
+        var title = {'text':`Washing frequency of <br> Subject ID ${name}`, 'font':{'family':'Arial Black', 'color':'#3895D3', 'size':16}, 'x':0.5, 'xanchor':'center', 'y':0.85, 'yanchor':'top'};
+        var xtitle = {title: {"text":`Count of OTUs in the sample`}, 'font':{'family':'Courier New, monospace', 'color':'#3895D3', 'size':12}, 'y':-0.05};
+        var ytitle = {title: {"text":`Top 10 OTUs in the sample`}, 'font':{'family':'Courier New, monospace', 'color':'#3895D3', 'size':12}};
         if(!restyle){
             var data = [{
                 type: "bar",
                 x: sample_values,
                 y: otu,
                 marker: {
-                    color: "rgba(128,0,128,0.5)"},
+                    color: "#3895D3"},
                 orientation: "h",
                 text: otu_labels,
             }];
             var layout = {
                 title: title,
-                xaxis: {title: {"text":"Sample Values"}}
+                xaxis: xtitle,
+                yaxis: ytitle
             }
             
             var config = {responsive: true};
@@ -44,17 +47,17 @@ function top10BarhPlot(individual, title, id, restyle=false){
         }
         else{
             //Plotly.restyle(id, {"x": [sample_values], "y":[otu]}, [0]);
-            Plotly.update(id, {"x": [sample_values], "y":[otu], "text": [otu_labels]}, {"title": title}, {responsive: true});
+            Plotly.update(id, {"x": [sample_values], "y":[otu], "text": [otu_labels]}, {"title": title, "xaxis":xtitle, "yaxis":ytitle}, {responsive: true});
         }
     }else{
         Plotly.deleteTraces(id, 0);
-        Plotly.newPlot(id, [{type: "bar", orientation: "h", x: [], y: [], text: []}], {title: title, xaxis: {title: {"text":"Sample Values"}}}, {responsive: true});
+        Plotly.newPlot(id, [{type: "bar", orientation: "h", x: [], y: [], text: []}], {title: title, xaxis: xtitle, yaxis: ytitle}, {responsive: true});
     }
     
 }
 
 //Bubble chart
-function bubbleChart(individual, title, id, restyle=false){
+function bubbleChart(individual, name, id, restyle=false){
     
     var otu = individual["otu_ids"];
     var sample_values = individual["sample_values"];
@@ -70,7 +73,9 @@ function bubbleChart(individual, title, id, restyle=false){
         })
         //console.log(otu, cmin, cmax);
         //Title styling
-        var title = {'text':title, 'font':{'family':'Arial Black', 'color':'black', 'size':16}, 'x':0.5, 'xanchor':'center', 'y':0.85, 'yanchor':'top'};
+        var title = {'text':`Sample values for each OTUs in Subject ID ${name}`, 'font':{'family':'Arial Black', 'color':'#3895D3', 'size':16}, 'x':0.5, 'xanchor':'center', 'y':0.85, 'yanchor':'top'};
+        var ytitle = {title: {"text":`Count of OTUs in the sample`}, 'font':{'family':'Courier New, monospace', 'color':'#3895D3', 'size':12}};
+        var xtitle = {title: {"text":`OTUs in the sample`}, 'font':{'family':'Courier New, monospace', 'color':'#3895D3', 'size':12}};
         if(!restyle){
             var data = [{
                 mode: "markers",
@@ -87,6 +92,8 @@ function bubbleChart(individual, title, id, restyle=false){
             }];
             var layout = {
                 title: title,
+                xaxis: xtitle,
+                yaxis: ytitle
             }
 
             var config = {responsive: true};
@@ -100,11 +107,11 @@ function bubbleChart(individual, title, id, restyle=false){
                 cmin: cmin,
                 cmax: cmax,
                 size: sample_values
-            }]}, {"title": title},{responsive: true});
+            }]}, {"title": title, "xaxis": xtitle, "yaxis": ytitle},{responsive: true});
         }
     }else{
         Plotly.deleteTraces(id, 0);
-        Plotly.newPlot(id, [{x: [], y: []}], {title: title}, {responsive: true});
+        Plotly.newPlot(id, [{x: [], y: []}], {title: title, xaxis: xtitle, yaxis: ytitle}, {responsive: true});
     }
     
 }
@@ -127,7 +134,7 @@ function wfreqStats(data){
 }
 
 //Gauge chart
-function gaugeChart(id, min_wfreq, max_wfreq, wfreq, radius, restyle=false, title){
+function gaugeChart(id, min_wfreq, max_wfreq, wfreq, radius, restyle=false, name){
     //Helper functions within the scope of gaugeChart
     function greenShades(N){
         var arr = [];
@@ -203,7 +210,7 @@ function gaugeChart(id, min_wfreq, max_wfreq, wfreq, radius, restyle=false, titl
         }]
 
     var config = {responsive: true};
-    var title = {'text': title, 'font':{'family':'Arial Black', 'color':'black', 'size':16}, 'y':0.2, yref: 'paper'};
+    var title = {'text': `Washing frequency of <br> Subject ID ${name}`, 'font':{'family':'Arial Black', 'color':'#3895D3', 'size':16}, 'y':0.2, yref: 'paper'};
     var margin ={
         l: 0,
         r: 0,
@@ -248,15 +255,15 @@ function init(file_content){
         // The dataset reveals that a small handful of microbial species 
         // (also called operational taxonomic units, or OTUs, in the study) were present in more than 70% of people, while the rest were relatively rare.
         var individual = data[0]['samples'].filter(item=>item.id==names[0])[0];
-        top10BarhPlot(individual, `Top 10 OTUs in Subject ID ${names[0]}`, "bar");
-        bubbleChart(individual, `Sample values for each OTUs in Subject ID ${names[0]}`, "bubble");
+        top10BarhPlot(individual, names[0], "bar");
+        bubbleChart(individual, names[0], "bubble");
 
         // The basic structure of a gauge chart is similar to a donut chart. This means that we can use some cleverly selected values and create simple gauge charts by still keeping the type attribute set to pie. Basically, we will be hiding some sections of the full pie to make it look like a gauge chart.
         // The trick they did is to put a hole into the pie with an radius of 0.5, 
         // now they have a donut chart. What they did in addition is kind of tricky, they put N + 1 values to the pie/donut Chart. 
         // N is the number of gauge chart elements you want to have. You also have to define N + 1 colors and N + 1 labels for the chart.
         // This divides the whole pie equally between the hidden and visible part (Last value corresponds to invisible)
-        gaugeChart("gauge", ...wfreqStats(data), demographics_initial.wfreq, radius, false, `Washing frequency of <br> Subject ID ${names[0]}`);
+        gaugeChart("gauge", ...wfreqStats(data), demographics_initial.wfreq, radius, false, names[0]);
     }
     );
 
@@ -271,9 +278,9 @@ function optionChanged(value){
         //d3.select("#sample-metadata").html(`<ul style="list-style-type:none;"><li>id: ${demographics_initial.id}</li><li>ethnicity: ${demographics_initial.ethnicity}</li><li>gender: ${demographics_initial.gender}</li><li>age: ${demographics_initial.age}</li><li>location: ${demographics_initial.location}</li><li>bbtype: ${demographics_initial.bbtype}</li><li>wfreq: ${demographics_initial.wfreq}</li></ul>`);
         d3.select('#sample-metadata').html(`<p>id: ${demographics.id}</p><p>ethnicity: ${demographics.ethnicity}</p><p>gender: ${demographics.gender}</p><p>age: ${demographics.age}</p><p>location: ${demographics.location}</p><p>bbtype: ${demographics.bbtype}</p><p>wfreq: ${demographics.wfreq}</p>`);
         var individual = data[0]['samples'].filter(item=>item.id==value)[0];
-        top10BarhPlot(individual, `OTUs in Subject ID ${value}`, "bar", true);
-        bubbleChart(individual, `Sample values for each OTUs in Subject ID ${value}`, "bubble");
-        gaugeChart("gauge", ...wfreqStats(data), demographics.wfreq, radius, true, `Washing frequency of <br> Subject ID ${value}`);
+        top10BarhPlot(individual, value, "bar", true);
+        bubbleChart(individual, value, "bubble");
+        gaugeChart("gauge", ...wfreqStats(data), demographics.wfreq, radius, true, value);
     });
     
 }

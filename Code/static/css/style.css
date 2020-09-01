@@ -46,7 +46,7 @@
     text-align: center;
     border-style: solid;
     border-width: thick;
-    border-color: #6F95AF;
+    border-color: #3895D3;
     background-color: whitesmoke;
 }
 
@@ -56,13 +56,13 @@
     margin-right: auto;
     border-style: solid;
     border-width: thick;
-    border-color: #6F95AF;
+    border-color: #3895D3;
     background-color: whitesmoke;
 }
 
 .demographic  .panel-title {
     text-align: center;
-    background-color: #6F95AF;
+    background-color: #3895D3;
     color: whitesmoke;
     font-size: 150%;
 }
