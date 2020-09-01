@@ -53,7 +53,7 @@ This project is to build an interactive dashboard to explore the [Belly Button B
 
 ## CodeBase
 * [app.js](static/js/app.js)
-* [style.css](statics/css/style.css)
+* [style.css](static/css/style.css)
 * [index.html](index.html)
 
 ## References
