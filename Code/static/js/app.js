@@ -11,6 +11,10 @@ function top10BarhPlot(individual, name, id, restyle=false){
     var otu = individual["otu_ids"].sort((a,b)=> individual.sample_values[individual["otu_ids"].indexOf(b)] - individual.sample_values[individual["otu_ids"].indexOf(a)] ).map(item => "OTU "+item);
     var otu_labels = individual["otu_labels"].sort((a,b)=> individual.sample_values[individual["otu_labels"].indexOf(b)] - individual.sample_values[individual["otu_labels"].indexOf(a)]);
     var sample_values = individual["sample_values"].sort((a,b)=>b-a);
+    //Title styling
+    var title = {'text':`Washing frequency of <br> Subject ID ${name}`, 'font':{'family':'Arial Black', 'color':'#3895D3', 'size':16}, 'x':0.5, 'xanchor':'center', 'y':0.85, 'yanchor':'top'};
+    var xtitle = {title: {"text":`Count of OTUs in the sample`}, 'font':{'family':'Courier New, monospace', 'color':'#3895D3', 'size':12}, 'y':-0.05};
+    var ytitle = {title: {"text":`Top 10 OTUs in the sample`}, 'font':{'family':'Courier New, monospace', 'color':'#3895D3', 'size':12}};
     if(otu.length){
         if (otu.length>10){
             otu = otu.slice(0,10);
@@ -22,10 +26,6 @@ function top10BarhPlot(individual, name, id, restyle=false){
         otu = otu.sort((a,b)=> -1);
         sample_values = sample_values.sort((a,b)=> -1);
         
-        //Title styling
-        var title = {'text':`Washing frequency of <br> Subject ID ${name}`, 'font':{'family':'Arial Black', 'color':'#3895D3', 'size':16}, 'x':0.5, 'xanchor':'center', 'y':0.85, 'yanchor':'top'};
-        var xtitle = {title: {"text":`Count of OTUs in the sample`}, 'font':{'family':'Courier New, monospace', 'color':'#3895D3', 'size':12}, 'y':-0.05};
-        var ytitle = {title: {"text":`Top 10 OTUs in the sample`}, 'font':{'family':'Courier New, monospace', 'color':'#3895D3', 'size':12}};
         if(!restyle){
             var data = [{
                 type: "bar",
@@ -50,8 +50,9 @@ function top10BarhPlot(individual, name, id, restyle=false){
             Plotly.update(id, {"x": [sample_values], "y":[otu], "text": [otu_labels]}, {"title": title, "xaxis":xtitle, "yaxis":ytitle}, {responsive: true});
         }
     }else{
+        console.log("Here");
         Plotly.deleteTraces(id, 0);
-        Plotly.newPlot(id, [{type: "bar", orientation: "h", x: [], y: [], text: []}], {title: title, xaxis: xtitle, yaxis: ytitle}, {responsive: true});
+        Plotly.newPlot(id, [{type: "bar", orientation: "h", x: [], y: [], marker: {color: "#3895D3"}, text: []}], {title: title, xaxis: xtitle, yaxis: ytitle}, {responsive: true});
     }
     
 }
@@ -63,7 +64,10 @@ function bubbleChart(individual, name, id, restyle=false){
     var sample_values = individual["sample_values"];
     var otu_labels = individual["otu_labels"];
     otu_labels = otu_labels.map(item=>item.replace(/;/g, "<br>"));
-
+    //Title styling
+    var title = {'text':`Sample values for each OTUs in Subject ID ${name}`, 'font':{'family':'Arial Black', 'color':'#3895D3', 'size':16}, 'x':0.5, 'xanchor':'center', 'y':0.85, 'yanchor':'top'};
+    var ytitle = {title: {"text":`Count of OTUs in the sample`}, 'font':{'family':'Courier New, monospace', 'color':'#3895D3', 'size':12}};
+    var xtitle = {title: {"text":`OTUs in the sample`}, 'font':{'family':'Courier New, monospace', 'color':'#3895D3', 'size':12}};
     if(otu.length){
         var cmin = otu.reduce(function (a,b){
             return (parseInt(a)<parseInt(b) ? a:b);
@@ -72,10 +76,6 @@ function bubbleChart(individual, name, id, restyle=false){
             return (parseInt(a)>parseInt(b) ? a:b);
         })
         //console.log(otu, cmin, cmax);
-        //Title styling
-        var title = {'text':`Sample values for each OTUs in Subject ID ${name}`, 'font':{'family':'Arial Black', 'color':'#3895D3', 'size':16}, 'x':0.5, 'xanchor':'center', 'y':0.85, 'yanchor':'top'};
-        var ytitle = {title: {"text":`Count of OTUs in the sample`}, 'font':{'family':'Courier New, monospace', 'color':'#3895D3', 'size':12}};
-        var xtitle = {title: {"text":`OTUs in the sample`}, 'font':{'family':'Courier New, monospace', 'color':'#3895D3', 'size':12}};
         if(!restyle){
             var data = [{
                 mode: "markers",
